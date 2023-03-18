@@ -1,0 +1,11 @@
+version: '3'
+services:
+  dvwa:
+    image: vulnerables/web-dvwa
+    container_name: web-dvwa
+    ports:
+      - "8080:80"
+    volumes:
+      - ./mysql:/var/lib/mysql
+      - ./html:/var/www/html
+      - ./php.ini:/etc/php/7.0/apache2/php.ini
