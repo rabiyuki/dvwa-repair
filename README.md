@@ -36,7 +36,7 @@ https://github.com/RandomStorm/DVWA
 
 今回は「文脈に応じてエスケープ処理を施す」を実施
 
-対象ファイル：`html\vulnerabilities\xss_d\index.php`
+修正対象ファイル：`html\vulnerabilities\xss_d\index.php`
 
 ### 格納型と反射型
 基本的な対策方法（IPA参照）
@@ -51,10 +51,20 @@ https://github.com/RandomStorm/DVWA
 
 今回は「エスケープ処理を施す」を実施
 
-対象ファイル（格納型）：`html\dvwa\includes\dvwaPage.inc.php`
+修正対象ファイル（格納型）：`html\dvwa\includes\dvwaPage.inc.php`
 
-対象ファイル（反射型）：`html\vulnerabilities\xss_r\source\medium.php`
+※データベースに格納する前にXSS対策としてエスケープ処理を行うと、予期せぬHTML構造になり、画面表示が崩壊する恐れがある。<br>
+そのため、入力値を表示をする段階でエスケープ処理を行うことが望ましい。
+
+修正対象ファイル（反射型）：`html\vulnerabilities\xss_r\source\medium.php`
 
 ## SQLインジェクション
 基本的な対策方法（IPA参照）
-1. 
+1. SQL文の組み立ては全てプレースホルダで実装する。
+2. SQL文の組み立てを文字列連結により行う場合は、エスケープ処理等を行うデータベースエンジンのAPIを用いて、SQL文のリテラルを正しく構成する。
+3. エラーメッセージをそのままブラウザに表示しない。
+4. データベースアカウントに適切な権限を与える。
+
+今回は「SQL文の組み立ては全てプレースホルダで実装する」を実施
+
+修正対象ファイル：`html\vulnerabilities\sqli\source\medium.php`
