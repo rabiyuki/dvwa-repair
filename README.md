@@ -39,8 +39,22 @@ https://github.com/RandomStorm/DVWA
 対象ファイル：`html\vulnerabilities\xss_d\index.php`
 
 ### 格納型と反射型
-- 
+基本的な対策方法（IPA参照）
+1. ウェブページに出力する全ての要素に対して、エスケープ処理を施す。
+2. 入力されたHTMLテキストから、スクリプトに該当する文字列を排除する。
+  - `<script>`や`javascript:`を無害な文字列へ置換する場合、`<xscript>`や`xjavascript:`のように、その文字列に適当な文字を付加する。
+4. HTTPレスポンスヘッダのContent-Typeフィールドに文字コード（charset）を指定する。
+  - Content-Typeフィールドで文字コードの指定を省略した場合、ブラウザは文字コードを独自の方法で推定して、推定した文字コードにしたがって画面表示を処理する。
+5. クロスサイト・スクリプティングの潜在的な脆弱性対策として有効なブラウザの機能を有効にするレスポンスヘッダを返す。
+  - X-XSS-Protection
+  - Content Security Policy
+
+今回は「エスケープ処理を施す」を実施
+
+対象ファイル（格納型）：`html\dvwa\includes\dvwaPage.inc.php`
+
+対象ファイル（反射型）：`html\vulnerabilities\xss_r\source\medium.php`
 
 ## SQLインジェクション
-
-## SQLインジェクション（ブラインド）
+基本的な対策方法（IPA参照）
+1. 
